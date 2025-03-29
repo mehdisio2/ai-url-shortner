@@ -1,7 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-
-
 const routes = require("./routes"); // Importing routes
 
 const app = express();
@@ -12,6 +10,6 @@ app.use(cors());         // Enable CORS
 
 
 // Routes
-app.use("/api", routes);
+app.use("/", routes);
 
 module.exports = app;
