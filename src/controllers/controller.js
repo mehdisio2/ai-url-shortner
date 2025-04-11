@@ -39,8 +39,14 @@ export const urlRedirectToOriginal = async (req, res) => {
 }
 
 // Controller to delete a shortened URL
-export const deleteShortenUrl = (req, res) => {
-  console.log('deleteShortenUrl called');
-  // Add logic here to delete the shortened URL from the database
+export const deleteShortenUrl = async (req, res) => {
+ try {
+  const short_code = req.params.id;
+  const urldeleted = await db.query('DELETE FROM urls WHERE short_code = ($1)', [short_code])
+  res.status(200).send('URL deleted')
+} catch (error) {
+  console.error('unable to delete URL')
+ } 
+
   // Example: res.status(200).send('URL deleted');
 }
