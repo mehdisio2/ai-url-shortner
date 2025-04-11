@@ -1,14 +1,15 @@
-const express = require('express')
+import express from 'express';  // Use import instead of require
+import { urlShortner, urlRedirectToOriginal, deleteShortenUrl } from '../controllers/controller.js';  // Import your controllers using ES Modules
+
 const router = express.Router();
-const controller = require('../controllers/controller')
 
 // POST/shorten to accept and shorten a URL
-router.post('/shorten', controller.urlShortner);
+router.post('/shorten', urlShortner);
 
-//GET/:id to redirect the original URL
-router.get('/:id', controller.urlRedirectToOriginal);
+// GET/:id to redirect the original URL
+router.get('/:id', urlRedirectToOriginal);
 
-//DELETE/:id to delete a shortened URL
-router.delete('/:id', controller.deleteShortenUrl);
+// DELETE/:id to delete a shortened URL
+router.delete('/:id', deleteShortenUrl);
 
-module.exports = router;
+export default router;  // Use export default to export the router
