@@ -10,3 +10,13 @@ export const getId = async (url) => {
         console.error('cannot get the id', error)
     }
 }
+
+export const storeShortUrl = async (shortCode, id) => {
+    try {
+        const res = await db.query('UPDATE urls SET short_code = ($1) WHERE id = ($2)', [shortCode, id]);
+        return res;
+    } catch (error) {
+        console.error('cannot store the short-code')
+    }
+
+}

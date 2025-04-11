@@ -1,4 +1,5 @@
-import { getId } from '../services/services.js';  // Use ES Modules import
+import { getId, storeShortUrl } from '../services/services.js';  // Use ES Modules import
+import * as db from '../config/db.js'
 
 // Controller to shorten a URL
 export const urlShortner = async (req, res) => {  // Make the function async
@@ -6,8 +7,17 @@ export const urlShortner = async (req, res) => {  // Make the function async
     const { url } = req.body;
     const response = await getId(url);  // Await the result of the async function
     const id = response.rows[0].id;
-    console.log(id);
-    res.status(201).json({ id });  // Return the shortened URL ID as a response
+    const short_code = Buffer.from(String(id)).toString('base64'); // hashing the id using base64
+    const shortCodeStored = await storeShortUrl(short_code, id);
+    
+    let shortUrl;
+    if(shortCodeStored){
+      shortUrl = 'http://localhost:5000/' + short_code;
+    }else {
+      console.error('unable to store the short_code');
+    }
+    
+    res.status(201).json(shortUrl);  // Return the shortened URL as a response
   } catch (error) {
     console.error('Error in urlShortner controller:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -15,10 +25,17 @@ export const urlShortner = async (req, res) => {  // Make the function async
 }
 
 // Controller to redirect to the original URL
-export const urlRedirectToOriginal = (req, res) => {
-  console.log('urlRedirectToOriginal called');
-  // Add logic here to redirect to the original URL using the ID from the shortened URL
-  // Example: res.redirect(originalUrl);
+export const urlRedirectToOriginal = async (req, res) => {
+  try {
+    const shortCode = req.params.id;
+    const originalUrl = await db.query('SELECT original_url FROM urls WHERE short_code = ($1)', [shortCode]);
+    console.log(originalUrl);
+    res.redirect(originalUrl.rows[0].original_url);
+  } catch (error) {
+    console.error("unable to redirect to the original url")
+  }
+
+
 }
 
 // Controller to delete a shortened URL
