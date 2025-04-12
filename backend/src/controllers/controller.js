@@ -7,7 +7,7 @@ export const urlShortner = async (req, res) => {  // Make the function async
     const { url } = req.body;
     const response = await getId(url);  // Await the result of the async function
     const id = response.rows[0].id;
-    const short_code = Buffer.from(String(id)).toString('base62'); // hashing the id using base64
+    const short_code = Buffer.from(String(id)).toString('base64'); // hashing the id using base64
     const shortCodeStored = await storeShortUrl(short_code, id);
     
     let shortUrl;
