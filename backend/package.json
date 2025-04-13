@@ -23,5 +23,8 @@
     "morgan": "^1.10.0",
     "pg": "^8.14.1"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@ljharb/tsconfig": "^0.3.2"
+  }
 }
