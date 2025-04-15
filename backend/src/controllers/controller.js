@@ -1,6 +1,10 @@
 import { getId, storeShortUrl } from '../services/services.js';  // Use ES Modules import
 import * as db from '../config/db.js'
 import * as bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+
+dotenv.config({ path: '/home/mahdi/Documents/Projects/ai-url-shortner/backend/.env' });
 
 // Controller to shorten a URL
 export const urlShortner = async (req, res) => {  // Make the function async
@@ -46,6 +50,7 @@ export const deleteShortenUrl = async (req, res) => {
   if(urldeleted) res.status(200).send('URL deleted');
 } catch (error) {
   console.error('unable to delete URL')
+
  } 
 }
 
@@ -66,20 +71,23 @@ export const addNewUser = async (req, res) => {
 export const checkUser = async (req, res) => {
   try {
     const {username, password} = req.body;
-    console.log(password)
-    const  {rows}= await db.query('SELECT password FROM users WHERE username = ($1)', [username])
+    const  {rows} = await db.query('SELECT id, password FROM users WHERE username = ($1)', [username])
     const hash = rows[0].password;
-    console.log(hash);
     const isPassword = await bcrypt.compare(password, hash);
-    console.log(isPassword);
+    
     if(isPassword == true){
+      const payload = {id: rows[0].id, username: username}; // rows[0].id : is the id returned from the database
+      const token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '1h'});
+      res.cookie('token', token, {
+        httpOnly: true,
+      })
       res.status(200).send('login succesfully')
     }else{
       res.status(401).send('incorrect password or username')
     }
     
   } catch (error) {
-    console.error('unabel to get user', error)
+    res.status(500).send('internal server error')
   }
 
 }
