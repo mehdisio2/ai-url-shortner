@@ -63,6 +63,7 @@ export const addNewUser = async (req, res) => {
     if(passwordStored) res.status(200).send('user added succesfully')
   } catch (error) {
     console.error('unable to add user', error)
+    res.status(500).send('unable to add user')
   }
 
 
