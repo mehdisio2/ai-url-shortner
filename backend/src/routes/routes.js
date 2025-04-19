@@ -5,17 +5,18 @@ import { urlShortner,
      addNewUser, 
      checkUser } 
      from '../controllers/controller.js';  // Import your controllers using ES Modules
+import authenticateToken from '../middleware/jwtVerification.js';
 
 const router = express.Router();
 
 // POST/shorten to accept and shorten a URL
-router.post('/shorten', urlShortner);
+router.post('/shorten',authenticateToken, urlShortner);
 
 // GET/:id to redirect the original URL
-router.get('/:id', urlRedirectToOriginal);
+router.get('/:id',authenticateToken, urlRedirectToOriginal);
 
 // DELETE/:id to delete a shortened URL
-router.delete('/:id', deleteShortenUrl);
+router.delete('/:id',authenticateToken, deleteShortenUrl);
 
 
 // POST/signup 

@@ -8,14 +8,13 @@ function Login(){
 
     const sendCredentials = async (e) => {
         e.preventDefault();
-        console.log(password)
-        console.log(username)
         try {
             const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({username: username, password: password})
             })
             console.log(response);

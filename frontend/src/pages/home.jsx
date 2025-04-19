@@ -11,6 +11,7 @@ function Home(){
           headers: {
             'Content-Type': 'application/json',
           },
+          credentials: 'include',
           body: JSON.stringify({url})
         })
         const shortUrl = await res.json();
