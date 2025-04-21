@@ -93,3 +93,16 @@ export const checkUser = async (req, res) => {
 
 }
  
+export const smartUrlShortner = (req, res) => {
+  try {
+    const {url, prompt} = req.body;
+
+
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Enternal server error');
+  }
+
+
+}
