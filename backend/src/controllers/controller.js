@@ -3,6 +3,8 @@ import * as db from '../config/db.js'
 import * as bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
+import { generateSmrtUrl } from '../utils/generatedUrl.js';
+
 
 dotenv.config({ path: '/home/mahdi/Documents/Projects/ai-url-shortner/backend/.env' });
 
@@ -92,13 +94,15 @@ export const checkUser = async (req, res) => {
   }
 
 }
- 
-export const smartUrlShortner = (req, res) => {
+export const smartUrlShortner = async (req, res) => {
   try {
     const {url, prompt} = req.body;
-
-
+    const generatedAliases = await generateSmrtUrl(url, prompt);
+    const {rows} = await db.query(`SELECT short_code FROM urls where short_code = ANY($1)`, [generatedAliases]);
+    const existingAliases = rows.map(row => row.name);
+    const uniqueAliases = generatedAliases.filter( item => !existingAliases.includes(item));
     
+    res.status(200).json({aliases: uniqueAliases})    
   } catch (error) {
     console.log(error);
     res.status(500).json('Enternal server error');

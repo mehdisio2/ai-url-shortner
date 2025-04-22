@@ -14,7 +14,7 @@ const router = express.Router();
 router.post('/shorten',authenticateToken, urlShortner);
 
 // POST/ai-generated-url
-router.post('/ai-generated-url', authenticateToken, smartUrlShortner);
+router.post('/ai-generated-url',authenticateToken, smartUrlShortner);
 
 // GET/:id to redirect the original URL
 router.get('/:id',authenticateToken, urlRedirectToOriginal);

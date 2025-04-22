@@ -1,6 +1,5 @@
 import OpenAI from 'openai'
 import dotenv from 'dotenv'
-import { response } from 'express';
 
 dotenv.config({ path: '/home/mahdi/Documents/Projects/ai-url-shortner/backend/.env' });
 
@@ -10,22 +9,20 @@ const openai = new OpenAI({
   });
 
 
-const generateSmrtUrl = async (url, description) => {
+export const generateSmrtUrl = async (url, description) => {
     const prompt = {role:'user', 
-        content:`Suggest a short, human-readable aliases for the following website:
+        content:`Suggest a 3 short, human-readable aliases for the following website:
             url: ${url},
             description: ${description},
         `}
 
     const completion = await openai.chat.completions.create({
-        model: 'google/learnlm-1.5-pro-experimental:free',
+        model: 'google/gemini-2.5-flash-preview:thinking',
         messages: [
           {
             role: 'system',
-            content: `You generate clean, very very short, very very unique, 
-            you can include some numbers or simple symbols to make the alias more unique,
-             SEO-friendly URL aliases only and 
-            you don't write any descriptions or explations just aliases`
+            content: `You generate clean,3-10 characheters, short, unique,
+             SEO-friendly URL aliases`
           },
           prompt
         ],          
@@ -51,15 +48,8 @@ const generateSmrtUrl = async (url, description) => {
                       type: 'number',
                       description: 'Confidence or quality score for the alias (0 to 1)',
                     },
-                    tags: {
-                      type: 'array',
-                      description: 'Optional tags related to the alias, such as topic or category',
-                      items: {
-                        type: 'string',
-                      },
-                    },
                   },
-                  required: ['alias'],
+                  required: ['alias'], // u can add the score to be required.
                 },
               },
             },
@@ -70,10 +60,8 @@ const generateSmrtUrl = async (url, description) => {
       }
 })
 
-    const aliases = completion.choices[0].message.content;
-    return JSON.parse(aliases);
+    const {aliases} = JSON.parse(completion.choices[0].message.content);
+    return aliases;
 
 }
 
-const aliases = await generateSmrtUrl('https://myblog.com/article/123', 'This is a blog post about cybersecurity and its relation with ai on human life do not give me this alias: cyber-ai-life');
-console.log(aliases.aliases[0].alias);
