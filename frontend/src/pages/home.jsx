@@ -26,7 +26,7 @@ function Home(){
     return (
         <>
             <input type="text" placeholder='Enter a url' onChange={(e) => setUrl(e.target.value)}/>
-            <button onClick={getShortedLink}>GET YOUR LINK</button>
+            <button onClick={getShortedLink} className="bg-amber-400">GET YOUR LINK</button>
             <p>{shortUrl}</p>
         </>
       )
