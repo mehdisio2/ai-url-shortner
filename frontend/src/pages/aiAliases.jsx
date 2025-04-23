@@ -3,6 +3,7 @@ import { useState } from "react";
 function AiGeneration(){
     const [input, setInput] = useState('');
     const [aliases, setAliases] = useState([]);
+    const [editedAliase, setEditableAliase] = useState('');
 
     const generateAliases = async () => {
        const response = await fetch('http://localhost:5000/ai-generated-url', {
@@ -29,7 +30,11 @@ function AiGeneration(){
             <button onClick={generateAliases}>Generate</button>
             <ul>
                 {aliases.map((item, index) => (
-                    <li key={index}>{item.alias}</li>
+                    setEditableAliase(item.alias),
+                    <li key={index}>
+                        <input type="text" value={item.alias}
+                         onChange={(e) => setEditableAliase(e.target.value)}/>
+                    </li>
                 ))}
             </ul> 
         </>

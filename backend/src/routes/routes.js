@@ -7,6 +7,7 @@ import { urlShortner,
      smartUrlShortner } 
      from '../controllers/controller.js';  // Import your controllers using ES Modules
 import authenticateToken from '../middleware/jwtVerification.js';
+import trackClickMiddleware from '../middleware/trackClickMiddleware.js';
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ router.post('/shorten',authenticateToken, urlShortner);
 router.post('/ai-generated-url', smartUrlShortner);
 
 // GET/:id to redirect the original URL
-router.get('/:id',authenticateToken, urlRedirectToOriginal);
+router.get('/:id',trackClickMiddleware, urlRedirectToOriginal);
 
 // DELETE/:id to delete a shortened URL
 router.delete('/:id',authenticateToken, deleteShortenUrl);

@@ -38,6 +38,7 @@ export const urlRedirectToOriginal = async (req, res) => {
     const originalUrl = await db.query('SELECT original_url FROM urls WHERE short_code = ($1)', [shortCode]);
     res.redirect(originalUrl.rows[0].original_url);
   } catch (error) {
+    res.status(500).send('Internal Server Error');
     console.error("unable to redirect to the original url")
   }
 
