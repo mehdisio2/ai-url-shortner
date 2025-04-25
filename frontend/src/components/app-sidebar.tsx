@@ -16,10 +16,10 @@ import {
   IconReport,
   IconSearch,
   IconSettings,
-  IconUsers,
-} from "@tabler/icons-react"
 
-import { NavDocuments } from "@/components/nav-documents"
+} from "@tabler/icons-react"
+import Link from "next/link"
+
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
 import { NavUser } from "@/components/nav-user"
@@ -32,6 +32,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { url } from "inspector"
 
 const data = {
   user: {
@@ -41,8 +42,8 @@ const data = {
   },
   navMain: [
     {
-      title: "Home",
-      url: "#",
+      title: "Links",
+      url: "/dashboard/links",
       icon: IconDashboard,
     },
     {
@@ -52,7 +53,7 @@ const data = {
     },
     {
       title: "Analytics",
-      url: "#",
+      url: "/dashboard/analytics",
       icon: IconChartBar,
     },
     {
@@ -145,7 +146,7 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function  AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
