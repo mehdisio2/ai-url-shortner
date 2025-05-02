@@ -1,0 +1,27 @@
+
+[
+    {
+      "originalUrl": "https://example.com/very/long/path/to/some/resource/with/many/parameters?param1=value1&param2=value2",
+      "shortUrl": "abc123",
+      "clicks": 42,
+      "createdAt": "2023-04-15T10:30:00"
+    },
+    {
+        "originalUrl": "https://example.com/very/long/path/to/some/resource/with/many/parameters?param1=value1&param2=value2",
+        "shortUrl": "abc123",
+        "clicks": 42,
+        "createdAt": "2023-04-15T10:30:00"
+      },
+      {
+        "originalUrl": "https://example.com/very/long/path/to/some/resource/with/many/parameters?param1=value1&param2=value2",
+        "shortUrl": "abc123",
+        "clicks": 42,
+        "createdAt": "2023-04-15T10:30:00"
+      },
+      {
+        "originalUrl": "https://example.com/very/long/path/to/some/resource/with/many/parameters?param1=value1&param2=value2",
+        "shortUrl": "abc123",
+        "clicks": 42,
+        "createdAt": "2023-04-15T10:30:00"
+      }
+]

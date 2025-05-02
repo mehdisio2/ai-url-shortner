@@ -4,7 +4,8 @@ import { urlShortner,
      deleteShortenUrl,
      addNewUser, 
      checkUser,
-     smartUrlShortner } 
+     smartUrlShortner,
+     getUrls } 
      from '../controllers/controller.js';  // Import your controllers using ES Modules
 import authenticateToken from '../middleware/jwtVerification.js';
 import trackClickMiddleware from '../middleware/trackClickMiddleware.js';
@@ -14,8 +15,11 @@ const router = express.Router();
 // POST/shorten to accept and shorten a URL
 router.post('/shorten',authenticateToken, urlShortner);
 
+// GET/getUrls to return all the urls made by a user
+router.get('/getUrls', authenticateToken, getUrls);
+
 // POST/ai-generated-url
-router.post('/ai-generated-url', smartUrlShortner);
+router.post('/ai-generated-url',authenticateToken, smartUrlShortner);
 
 // GET/:id to redirect the original URL
 router.get('/:id',trackClickMiddleware, urlRedirectToOriginal);

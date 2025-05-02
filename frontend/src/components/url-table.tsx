@@ -4,40 +4,9 @@ import { useState } from "react"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Copy, ExternalLink } from "lucide-react"
+import urlData from "@/app/dashboard/links/urls.json"
 
 // Mock data - replace with your actual data
-const urlData = [
-  {
-    originalUrl: "https://example.com/very/long/path/to/some/resource/with/many/parameters?param1=value1&param2=value2",
-    shortUrl: "abc123",
-    clicks: 42,
-    createdAt: new Date("2023-04-15T10:30:00"),
-  },
-  {
-    originalUrl: "https://anotherexample.com/blog/how-to-create-url-shortener",
-    shortUrl: "xyz789",
-    clicks: 127,
-    createdAt: new Date("2023-04-10T15:45:00"),
-  },
-  {
-    originalUrl: "https://docs.example.org/getting-started/introduction",
-    shortUrl: "def456",
-    clicks: 89,
-    createdAt: new Date("2023-04-12T09:15:00"),
-  },
-  {
-    originalUrl: "https://shop.example.net/products/category/electronics/smartphones",
-    shortUrl: "ghi789",
-    clicks: 215,
-    createdAt: new Date("2023-04-08T14:20:00"),
-  },
-  {
-    originalUrl: "https://blog.example.io/2023/04/latest-tech-trends",
-    shortUrl: "jkl012",
-    clicks: 63,
-    createdAt: new Date("2023-04-14T11:50:00"),
-  },
-]
 
 export function UrlTable() {
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null)
@@ -49,7 +18,7 @@ export function UrlTable() {
     setTimeout(() => setCopiedUrl(null), 2000)
   }
 
-  const formatDate = (date: Date) => {
+/*  const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "short",
@@ -58,6 +27,7 @@ export function UrlTable() {
       minute: "2-digit",
     }).format(date)
   }
+*/
 
   const truncateUrl = (url: string, maxLength = 40) => {
     return url.length > maxLength ? `${url.substring(0, maxLength)}...` : url
@@ -104,7 +74,7 @@ export function UrlTable() {
                 </div>
               </TableCell>
               <TableCell>{url.clicks}</TableCell>
-              <TableCell>{formatDate(url.createdAt)}</TableCell>
+              <TableCell>{url.createdAt}</TableCell>
             </TableRow>
           ))}
         </TableBody>
