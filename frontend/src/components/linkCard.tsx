@@ -35,8 +35,6 @@ function LinkCard({...props} : linkCrdProps) {
                 </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-
-
             </a>
             <a href={props.shortUrl} className="font-bold">{props.shortUrl}</a>
             <div className='flex justify-end gap-1'>
