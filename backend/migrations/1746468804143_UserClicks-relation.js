@@ -9,19 +9,16 @@ export const shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 export function up(pgm) {
-    pgm.addColumn('urls', {user_id : {
-        type: 'integer',
+    pgm.addColumn('clicks', {user_id: {
+        type: 'integer'
     }})
-
-    pgm.addConstraint('urls', 'user_id_fkey', {
-        foreignKeys : {
+    pgm.addConstraint('clicks', 'user_clicks_fkey', {
+        foreignKeys: {
             columns: 'user_id',
             references: 'users(id)',
-            onDelete: 'CASCADE'
+            onDelete: 'NO ACTION',
         }
-    } 
-    )
-
+    })
 };
 
 /**
@@ -30,7 +27,6 @@ export function up(pgm) {
  * @returns {Promise<void> | void}
  */
 export function down(pgm) {
-    pgm.dropConstraint('urls', 'user_id_fkey');
-    pgm.dropColumn('urls', 'user_id');
-
+    pgm.dropColumn('clicks', 'user_id')
+    pgm.dropConstraint('clicks', 'user_clicks_fkey')
 };
