@@ -12,7 +12,6 @@ import { Dialog,
 import LinkCard from '@/components/linkCard'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
-import { METHODS } from 'http'
 
 // Define the type for the card objects
 type Card = {
