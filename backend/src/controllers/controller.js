@@ -98,6 +98,7 @@ export const checkUser = async (req, res) => {
       const token = jwt.sign(payload, process.env.JWT_KEY, {expiresIn: '1h'});
       res.cookie('token', token, {
         httpOnly: true,
+        secure: true,
       })
       res.status(200).send('login succesfully')
     }else{
