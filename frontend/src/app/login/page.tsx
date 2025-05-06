@@ -8,7 +8,7 @@ export default function Page() {
 
   const sendCredentials = async (data : {username: string , password: string}) => {
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch('https://ai-url-shortner.onrender.com/login', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"
