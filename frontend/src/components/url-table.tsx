@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { Copy, ExternalLink } from "lucide-react"
 import urlData from "@/app/dashboard/links/urls.json"

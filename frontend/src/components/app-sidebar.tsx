@@ -18,7 +18,6 @@ import {
   IconSettings,
 
 } from "@tabler/icons-react"
-import Link from "next/link"
 
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
@@ -32,7 +31,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { url } from "inspector"
 
 const data = {
   user: {
