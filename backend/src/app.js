@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use(express.json()); // Parse JSON request body
 
 app.use(cors({
-    origin: 'https://ai-url-shortner.onrender.com/10000',
+    origin: 'https://ai-url-shortner-3o9dxgzx8-mehdisio2s-projects.vercel.app',
     credentials: true
   }));
   
