@@ -18,6 +18,7 @@ export default function Page() {
       
       if(response.ok){
         router.push('/dashboard/links')
+        console.log(response)
       } else {
         console.log('invalid credentials')
       }
