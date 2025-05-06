@@ -13,10 +13,10 @@ import trackClickMiddleware from '../middleware/trackClickMiddleware.js';
 const router = express.Router();
 
 // POST/shorten to accept and shorten a URL
-router.post('/shorten', urlShortner);
+router.post('/shorten',authenticateToken, urlShortner);
 
 // GET/getUrls to return all the urls made by a user
-router.get('/getUrls', getUrls);
+router.get('/getUrls',authenticateToken, getUrls);
 
 // POST/ai-generated-url
 router.post('/ai-generated-url',authenticateToken, smartUrlShortner);

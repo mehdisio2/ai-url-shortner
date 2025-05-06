@@ -12,6 +12,7 @@ import { Dialog,
 import LinkCard from '@/components/linkCard'
 import { Input } from '@/components/ui/input'
 import { useEffect, useState } from 'react'
+import { METHODS } from 'http'
 
 // Define the type for the card objects
 type Card = {
@@ -26,7 +27,11 @@ export default function Page() {
 
 
     useEffect(() => {
-        fetch("http://localhost:5000/getUrls") 
+        fetch("http://localhost:5000/getUrls", {
+            method: 'GET',
+            credentials: 'include'
+        }
+        ) 
          .then((res) => res.json())
          .then(data => setCards(data.links))
          .then((data) => console.log(data))
@@ -40,7 +45,8 @@ export default function Page() {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ url: input })
+            body: JSON.stringify({ url: input }),
+            credentials: 'include'
         });
 
         const data = await response.json();

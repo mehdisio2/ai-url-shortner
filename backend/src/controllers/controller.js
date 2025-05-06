@@ -101,6 +101,7 @@ export const checkUser = async (req, res) => {
       })
       res.status(200).send('login succesfully')
     }else{
+      console.log('unatrheh')
       res.status(401).send('incorrect password or username')
     }
     
