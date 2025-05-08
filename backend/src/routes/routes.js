@@ -28,9 +28,9 @@ router.get('/:id',trackClickMiddleware, urlRedirectToOriginal);
 router.delete('/:id',authenticateToken, deleteShortenUrl);
 
 // POST/signup 
-router.post('/signup', addNewUser);
+router.post('/api/signup', addNewUser);
 
 // POST/login
-router.post('/login', checkUser);
+router.post('/api/login', checkUser);
 
 export default router;  // Use export default to export the router
