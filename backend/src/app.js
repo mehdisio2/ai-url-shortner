@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use(express.json()); // Parse JSON request body
 
 app.use(cors({
-    origin: 'http://frontend:3000',
+    origin: 'http://192.168.157.157',
     credentials: true
   }));
   
