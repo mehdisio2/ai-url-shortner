@@ -1,0 +1,19 @@
+FROM node:22
+
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the backend source code (including wait-for-it.sh)
+COPY . .
+
+# Make wait-for-it.sh executable
+RUN chmod +x wait-for-it/wait-for-it.sh
+
+EXPOSE 5000
+
+# Wait for Postgres, run migrations, then start the server
+CMD ["sh", "-c", "./wait-for-it/wait-for-it.sh postgres:5432 -- npm run migrate:up && node src/server.js"]
+

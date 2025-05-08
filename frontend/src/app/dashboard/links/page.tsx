@@ -26,7 +26,7 @@ export default function Page() {
 
 
     useEffect(() => {
-        fetch("https://ai-url-shortner.onrender.com/getUrls", {
+        fetch("http://localhost:5000/getUrls", {
             method: 'GET',
             credentials: 'include'
         }
@@ -39,7 +39,7 @@ export default function Page() {
     ,[])
 
     const shortenUrl = async () => {
-        const response = await fetch("https://ai-url-shortner.onrender.com/shorten", {
+        const response = await fetch("http://localhost:5000/shorten", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
