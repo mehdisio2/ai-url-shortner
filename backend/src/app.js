@@ -17,7 +17,7 @@ app.use(cors({
   
 
 // Routes
-app.use('/', routes);
+app.use('/api/', routes);
 
 export default app;  // Use export default to export the app
 
