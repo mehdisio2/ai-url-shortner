@@ -8,7 +8,7 @@ export default function Page() {
   const router = useRouter();
   const sendCredentials = async (data : {username: string , password: string}) => {
     try {
-     const response = await fetch('http://localhost:5000/signup', {
+     const response = await fetch('/api/signup', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json"

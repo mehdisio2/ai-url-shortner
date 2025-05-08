@@ -13,13 +13,13 @@ import trackClickMiddleware from '../middleware/trackClickMiddleware.js';
 const router = express.Router();
 
 // POST/shorten to accept and shorten a URL
-router.post('/shorten',authenticateToken, urlShortner);
+router.post('/api/shorten',authenticateToken, urlShortner);
 
 // GET/getUrls to return all the urls made by a user
-router.get('/getUrls',authenticateToken, getUrls);
+router.get('/api/getUrls',authenticateToken, getUrls);
 
 // POST/ai-generated-url
-router.post('/ai-generated-url',authenticateToken, smartUrlShortner);
+router.post('/api/ai-generated-url',authenticateToken, smartUrlShortner);
 
 // GET/:id to redirect the original URL
 router.get('/:id',trackClickMiddleware, urlRedirectToOriginal);

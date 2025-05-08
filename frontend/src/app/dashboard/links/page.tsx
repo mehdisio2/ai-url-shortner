@@ -26,7 +26,7 @@ export default function Page() {
 
 
     useEffect(() => {
-        fetch("http://localhost:5000/getUrls", {
+        fetch("/api/getUrls", {
             method: 'GET',
             credentials: 'include'
         }
@@ -39,7 +39,7 @@ export default function Page() {
     ,[])
 
     const shortenUrl = async () => {
-        const response = await fetch("http://localhost:5000/shorten", {
+        const response = await fetch("/api/shorten", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"
