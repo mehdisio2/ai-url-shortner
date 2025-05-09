@@ -2,12 +2,8 @@ services:
   postgres:
     image: postgres:16
     restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
     ports:
-      - "5400:5432"  # Exposing Postgres on port 5400 for access from pgAdmin or other services
+      - "${POSTGRES_PORT}:5432"  # Exposing Postgres on port 5400 for access from pgAdmin or other services
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -44,8 +40,8 @@ services:
     image: dpage/pgadmin4:latest  # Official pgAdmin image
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com  # Set the default email for login
-      PGADMIN_DEFAULT_PASSWORD: admin  # Set the default password for login
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}  # Set the default email for login
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}  # Set the default password for login
     ports:
       - "5050:80"  # Expose pgAdmin on port 5050
     volumes:
