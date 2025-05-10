@@ -1,7 +1,7 @@
 import {redis, connectRedis} from "../config/redis.js";
 
 const getIp = (req) => {
-    const forwarded = req.headers['x-forwarded-for'];
+    const forwarded = req.headers['X-Real-IP'];
     return forwarded ? forwarded.split(',')[0].trim().replace : req.socket.remoteAddress.replace(/^::ffff:/, '');
 }
 
