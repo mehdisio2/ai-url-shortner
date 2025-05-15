@@ -1,4 +1,4 @@
-import {redis, connectRedis} from './config/redis.js'
+import {redis, connectRedis} from '../backend/src/config/redis.js'
 import streamhandler from './jobs/streamhandler.js'
 
 const streamKey = 'logStream'
@@ -7,6 +7,7 @@ const consumerName = 'worker-1'
 
 
 async function runWorker(){
+    console.log("worker is running")
     await connectRedis()
     
     try {

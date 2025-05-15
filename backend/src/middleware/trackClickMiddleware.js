@@ -33,9 +33,10 @@ const trackClickMiddleware = async (req, res, next) => {
     next()
    } catch (error) {
     console.error("Error in the server:", error);
-    res.status(500).send('Internal server error');
+    next()    
    }
     
 }
+
 
 export default trackClickMiddleware;

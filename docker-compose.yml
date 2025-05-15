@@ -14,6 +14,7 @@ services:
       - ./backend/.env
     depends_on:
       - postgres
+      - redis
 
   frontend:
     build:
@@ -25,6 +26,16 @@ services:
     depends_on:
       - backend
   
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+ # worker:
+  #  build: ./backend/worker  # or a separate ./worker folder if code is split
+   # depends_on:
+    #  - redis
+
   nginx:
     image: nginx
     ports:
@@ -35,6 +46,9 @@ services:
     depends_on:
       - backend
       - frontend
+    logging:
+      driver: "none"      
+
 
   pgadmin:
     image: dpage/pgadmin4:latest  # Official pgAdmin image
@@ -46,6 +60,8 @@ services:
       - "5050:80"  # Expose pgAdmin on port 5050
     volumes:
       - pgadmin_data:/var/lib/pgadmin  # Persist pgAdmin data
+    logging:
+      driver: "none"
 
 volumes:
   pgdata:  # For Postgres data

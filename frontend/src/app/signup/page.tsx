@@ -16,7 +16,7 @@ export default function Page() {
         body: JSON.stringify(data)
       })    
       if(response.ok){
-        router.push('/login')
+        router.push('/otp')
       }else {
         console.log('unable to create user')
       }

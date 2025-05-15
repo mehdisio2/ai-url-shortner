@@ -1,5 +1,7 @@
 import * as db from '../config/db.js'
 
+
+
 const streamhandler = async (data) => {
     const values = [String(data.ip), data.user_agent,data.timestamp, data.referrer, data.short_url_id, data.geo]
     console.log(JSON.stringify(values));
