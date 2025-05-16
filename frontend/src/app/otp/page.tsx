@@ -41,7 +41,7 @@ export default function Page() {
 
 
   function onSubmit(/*data: z.infer<typeof FormSchema>*/) {
-    toast("Event has been created.")
+    toast("user submitted succesfully")
     router.push('/login')
   }
 

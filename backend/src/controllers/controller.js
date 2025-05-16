@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import { generateSmrtUrl } from '../utils/generatedUrl.js';
-
+import { generateOtpCode} from '../utils/generateOtpCode'
 
 dotenv.config({ path: '/home/mahdi/Documents/Projects/ai-url-shortner/backend/.env' });
 
@@ -125,6 +125,14 @@ export const smartUrlShortner = async (req, res) => {
     console.log(error);
     res.status(500).json('Enternal server error');
   }
+}
 
+export const generateOtp = async (req, res) => {
+  const {email} = req.body;
+  const otpToken = generateOtpCode();
+
+}
+
+export const verifyOtp = async (req, res) => {
 
 }

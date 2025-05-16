@@ -33,4 +33,10 @@ router.post('/signup', addNewUser);
 // POST/login
 router.post('/login', checkUser);
 
+// GET/OTP genration
+router.get('/otp/generate', generateOtp);
+
+// POST/OTP verification
+router.post('/otp/verify', verifyOtp)
+
 export default router;  // Use export default to export the router
